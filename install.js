@@ -20,16 +20,24 @@ exports.register = function(commander,quick){
 
             var settings = {
                 root: options.root || '',
-                port: options.port || 3000
+                port: options.port || ''
             };
 
             Promise.try(function() {
                 return quick.util.findConf(function(dir){
-                    var filepath =  path.resolve(dir, 'qconf.js');
-                    settings = quick.util.merge(require(filepath),settings);
+                    var filepath =  path.resolve(dir, quick.config.confFileName);
+                    require(filepath)(quick);
+                    quick.config.serve.root_temp = settings.root;
+                    if(settings.port==''){
+                        if(quick.util._.has(quick.config.serve,'port')){
+                            settings.port = quick.config.serve.port;
+                        }else{
+                            settings.port = 3000;
+                        }
+                    }
                 });
             }).then(function(){
-                var serve = require('./lib/serve')(quick,settings);
+                var serve = require('./lib/serve')(quick);
                 var server = serve.server;
                 server.listen(settings.port,function(err){
                     if(!err){

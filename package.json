@@ -1,7 +1,7 @@
 {
     "name" : "quick-command-serve",
     "description" : "quick serve command.",
-    "version" : "0.0.8",
+    "version" : "0.0.17",
     "author" : "QuickJs Team <q@quickjs.org>",
     "homepage" : "http://q.quickjs.org/",
     "keywords": [ "q","quick","serve" ],
