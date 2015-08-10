@@ -45,7 +45,7 @@ exports.register = function(commander,quick){
                         quick.log.success('file server started，listening on port '+settings.port);
                         var url = "http://127.0.0.1:"+settings.port+"/home";
                         var cmd = 'start';
-                        if(process.platform == 'wind32'){
+                        if(process.platform == 'win32'){
                             cmd  = 'start "%ProgramFiles%\Internet Explorer\iexplore.exe"';
                         }else if(process.platform == 'linux'){
                             cmd  = 'xdg-open';
