@@ -1,6 +1,6 @@
 # quick-command-serve
 
-    开启一个本地静态资源服务器，支持combo
+    启动一个本地静态资源服务器，支持combo
 
 ## Install
     请直接安装quickjs
@@ -36,6 +36,9 @@ serve:{
                 content,
                 '\n});'
             ].join('');
+        },
+        tpl:function(content){
+            return this.js("return '"+content.replace(/\s/g,' ')+"'");
         }
     },
     mine: { //mine类型
@@ -66,3 +69,9 @@ serve:{
 
 ## More
     Please See source code
+> lib/default_conf.js
+
+## Github
+
+
+_https://github.com/dreamstu/quick-command-serve.git_

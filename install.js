@@ -5,6 +5,7 @@ exports.usage = '<names> [options]';
 exports.desc = 'Start a small static resource server';
 
 var path = require('path');
+var child_process = require("child_process");
 
 exports.register = function(commander,quick){
 
@@ -42,8 +43,18 @@ exports.register = function(commander,quick){
                 server.listen(settings.port,function(err){
                     if(!err){
                         quick.log.success('file server started，listening on port '+settings.port);
+                        var url = "http://127.0.0.1:"+settings.port+"/home";
+                        var cmd = 'start';
+                        if(process.platform == 'wind32'){
+                            cmd  = 'start "%ProgramFiles%\Internet Explorer\iexplore.exe"';
+                        }else if(process.platform == 'linux'){
+                            cmd  = 'xdg-open';
+                        }else if(process.platform == 'darwin'){
+                            cmd  = 'open';
+                        }
+                        child_process.exec(cmd + ' "'+url + '"');
                     }else{
-                        quick.log.error('file service failed to start!')
+                        quick.log.error('file service failed to start!');
                     }
                 });
                 server.on('error',function(e) {
